@@ -817,7 +817,331 @@ html {
 
 .gallery-arrow.left { left: -40px; }
 .gallery-arrow.right { right: -40px; }
+/* =========================
+   MOBILE / TABLET ADAPTIVE
+   Вставь в КОНЕЦ <style>
+   ========================= */
+
+/* чтобы большие секции не растягивали высоту на мобилках */
+@media (max-width: 768px) {
+  section {
+    min-height: auto;
+    padding: 72px 6vw;
+    gap: 24px;
+  }
+
+  .hero {
+    padding-top: 9svh;
+  }
+
+  .title {
+    letter-spacing: 3px;
+    -webkit-text-stroke: 1.5px var(--main);
+  }
+
+  .subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  .glass {
+    padding: 28px;
+    border-radius: 18px;
+  }
+
+  .glass h2,
+  .section-title,
+  #gallery h2 {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  .glass p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  /* Карточки — в одну колонку и одинаковая высота заголовков */
+  .grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .card h3 {
+    min-height: 44px;     /* выравниваем заголовки по уровню */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card p {
+    text-align: center;
+  }
+
+  /* Конфигурация — чуть меньше отступов */
+  .config-visual {
+    transform: none;
+    max-width: 100%;
+  }
+
+  /* Хотспоты — меньше точки */
+  .hotspot .dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Галерея — стрелки ближе и меньше, чтобы не уезжали за экран */
+  .gallery-wrapper {
+    padding: 0;
+  }
+
+  .gallery-viewport {
+    border-radius: 14px;
+  }
+
+  .gallery-arrow {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+  }
+
+  .gallery-arrow.left { left: 8px; }
+  .gallery-arrow.right { right: 8px; }
+
+  /* Увеличение картинки: на мобилках 300% чаще слишком, делаем мягче */
+  .gallery-image {
+    transform: scale(1.25); /* вместо 3х на телефоне */
+  }
+
+  /* CTA ниже и компактнее */
+  .cta h2 {
+    margin-top: 40px;
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .btn {
+    margin-top: 22px;
+    padding: 14px 26px;
+    font-size: 15px;
+  }
+
+  /* Футер */
+  .footer {
+    padding: 36px 6vw 26px;
+  }
+
+  .footer-partners-logos {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .footer-partners-logos img {
+    height: 44px;
+    max-width: 160px;
+  }
+
+  /* Карт внизу — меньше, чтобы не перекрывал */
+  .kart {
+    width: 120px;
+    bottom: 18px;
+  }
+
+  /* Модалка — не вылезает */
+  .modal-dialog {
+    margin: 8vh auto 0;
+    padding: 22px 16px;
+  }
+}
+
+/* супер маленькие экраны */
+@media (max-width: 420px) {
+  section {
+    padding: 64px 5vw;
+  }
+
+  .glass {
+    padding: 22px;
+  }
+
+  .title {
+    -webkit-text-stroke: 1.2px var(--main);
+  }
+
+  .gallery-image {
+    transform: scale(1.15);
+  }
+
+  .gallery-arrow {
+    width: 46px;
+    height: 46px;
+    font-size: 24px;
+  }
+}
+/* =========================
+   MOBILE (<= 768px)
+   вставь в самый конец <style>
+   ========================= */
+@media (max-width: 768px) {
+
+  /* Общие отступы секций */
+  section {
+    padding: 84px 18px;
+    gap: 28px;
+    min-height: auto; /* чтобы не было "пустых экранов" */
+  }
+
+  .hero {
+    padding-top: 90px; /* учитываем шапку */
+  }
+
+  .title {
+    font-size: clamp(44px, 12vw, 78px);
+    letter-spacing: 3px;
+    -webkit-text-stroke: 1.5px var(--main);
+  }
+
+  .subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-top: 14px;
+  }
+
+  .glass {
+    padding: 26px 18px;
+    border-radius: 18px;
+  }
+
+  .glass h2,
+  .section-title {
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  .glass p {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  /* Конфигурация: картинка не должна вылезать */
+  .config-visual {
+    transform: none;
+    max-width: 100%;
+  }
+  .config-image {
+    width: 100%;
+  }
+
+  /* Галерея: стрелки ближе и меньше, чтобы влезало */
+  .gallery-wrapper {
+    padding: 0 !important;
+  }
+  .gallery-viewport {
+    border-radius: 14px;
+  }
+  .gallery-arrow {
+    width: 46px;
+    height: 46px;
+    font-size: 26px;
+  }
+  .gallery-arrow.left { left: -10px; }
+  .gallery-arrow.right { right: -10px; }
+
+  /* CTA */
+  .cta h2 {
+    margin-top: 40px;
+    font-size: 22px;
+    line-height: 1.3;
+  }
+  .btn {
+    margin-top: 26px;
+    width: min(360px, 100%);
+    padding: 14px 18px;
+    font-size: 15px;
+  }
+
+  /* Карточки философии — одна колонка */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card {
+    padding: 22px;
+  }
+  .card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .card p {
+    font-size: 14px;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  /* Карт (который ездит снизу) — уменьшить */
+  .kart {
+    width: 110px;
+    bottom: 18px;
+  }
+
+  /* Шапка: делаем компактной и переносим навигацию в прокрутку */
+  .site-header {
+    backdrop-filter: blur(10px);
+  }
+
+  .header-inner {
+    max-width: 100%;
+    padding: 8px 14px;
+  }
+
+  .header-top {
+    padding: 0;
+    gap: 10px;
+  }
+
+  .header-logo {
+    font-size: 14px;
+    letter-spacing: 1.5px;
+  }
+
+  .header-cta {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .header-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 10px;
+    padding: 10px 0 6px;
+  }
+
+  .header-nav a {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
+
+/* =========================
+   SMALL (<= 360px)
+   ========================= */
+@media (max-width: 360px) {
+  .title { font-size: 40px; }
+  .gallery-arrow { width: 42px; height: 42px; font-size: 24px; }
+  .glass { padding: 22px 16px; }
+}
   </style>
+  
+
 </head>
 <script>
 (function () {
