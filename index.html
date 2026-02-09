@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>СИБКАРТ — Новая система картинга</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* ===== HEADER ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(14px);
+  background: rgba(5,5,8,0.75);
+  padding: 0;
+  border-bottom: 1px solid rgba(139,92,246,0.25);
+}
+
+
+/* --- TOP LINE --- */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0vw;
+}
+
+.header-logo {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text);
+  margin-top: 0;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(14px);
+  background: rgba(5,5,8,0.75);
+  padding: 0;
+  border-bottom: 1px solid rgba(139,92,246,0.25);
+}
+
+/* --- TOP LINE --- */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+.header-logo {
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text);
+  margin: 0;
+}
+
+
+/* контейнер (ширина как у тебя) */
+.header-inner {
+  width: 100%;
+  max-width: none;     /* ⬅️ важно */
+  margin: 0;
+  padding: 0 24px;    /* отступы от краёв экрана */
+}
+/* КНОПКА В ХЕДЕРЕ — компактная */
+.header-cta {
+  padding: 6px 14px;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 999px;
+  box-shadow: 0 0 14px rgba(139,92,246,0.45);
+  margin: 0;
+}
+.site-header .btn {
+  margin-top: 0 !important;
+  padding: 6px 14px !important;
+  font-size: 16px !important;
+  
+}
+
+
+/* --- NAV LINE --- */
+.header-nav {
+  display: flex;
+  width: 100%;              /* ⬅️ ВСЯ ШИРИНА ШАПКИ */
+  padding: 4px 0;           /* компактно по высоте */
+  border-top: 1px solid rgba(139,92,246,0.15);
+}
+
+.header-nav a {
+  flex: 1;                  /* ⬅️ РАВНЫЕ ДОЛИ */
+  text-align: center;
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+
+  color: var(--muted);
+  padding: 10px 0;          /* высота кнопки */
+
+  transition: 
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.header-nav a:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(139,92,246,0.18),
+    rgba(139,92,246,0.05)
+  );
+  color: var(--text);
+}
+.header-nav a.active {
+  color: var(--text);
+  background: rgba(139,92,246,0.22);
+}
+/* === FIX: никаких белых полей при overscroll === */
+html {
+  background: #050508;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at top, #120a2a, #050508);
+  background-color: #050508;
+  overscroll-behavior-y: none;
+}
+
+html, body {
+  background-color: #050508;
+}
+    :root {
+      --main: #8B5CF6;
+      --bg: #050508;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.55);
+      --content-max-width: 900px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+html {
+  background-color: #050508;
+}
+    html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: radial-gradient(circle at top, #120a2a, var(--bg));
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+    /* ===== CART ===== */
+    .kart {
+      position: fixed;
+      bottom: 32px;
+      left: 0;
+      width: 170px;
+      z-index: 3;
+      pointer-events: none;
+      will-change: transform, opacity;
+      opacity: 1;
+    }
+
+    /* ===== PARTICLES ===== */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      opacity: 0.6;
+      z-index: 2;
+      animation: fadeOut 1.2s forwards;
+    }
+
+    .smoke {
+      background: rgba(200,200,200,0.35);
+      filter: blur(6px);
+    }
+
+    .dust {
+      background: rgba(180,160,120,0.45);
+      filter: blur(2px);
+    }
+
+    @keyframes fadeOut {
+      to {
+        transform: translateY(-40px) scale(1.6);
+        opacity: 0;
+      }
+      
+    }
+    @keyframes pulse {
+  0% {
+    box-shadow:
+      0 0 0 4px rgba(139,92,246,0.35),
+      0 0 14px rgba(139,92,246,0.55);
+  }
+  50% {
+    box-shadow:
+      0 0 0 6px rgba(139,92,246,0.45),
+      0 0 26px rgba(139,92,246,0.85);
+  }
+  100% {
+    box-shadow:
+      0 0 0 4px rgba(139,92,246,0.35),
+      0 0 14px rgba(139,92,246,0.55);
+  }
+}
+
+    /* ===== CONTENT ===== */
+    section {
+      min-height: 100svh;
+      padding: 100px 10vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+      align-items: center;
+    }
+.hero {
+  align-items: center;
+  text-align: center;
+  padding-top: 10svh;
+}
+
+    .title {
+      font-size: clamp(56px, 10vw, 120px);
+      font-weight: 800;
+      letter-spacing: 6px;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--main);
+    }
+
+    .subtitle {
+      margin-top: 24px;
+      font-size: 20px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: var(--content-max-width);
+      text-align: center;
+    }
+
+    .subtitle span {
+      display: block;
+      text-transform: none;
+    }
+
+    .glass {
+      background: linear-gradient(
+        135deg,
+        rgba(139,92,246,0.18),
+        rgba(255,255,255,0.03)
+      );
+      border: 1px solid rgba(139,92,246,0.35);
+      backdrop-filter: blur(18px);
+      border-radius: 22px;
+      padding: 56px;
+      max-width: var(--content-max-width);
+    }
+
+    .glass h2 {
+      font-size: 36px;
+      margin-bottom: 36px;
+      color: var(--main);
+      text-align: center;
+    }
+    .section-title {
+  font-size: 36px;
+  margin-bottom: 36px;
+  color: var(--main);
+  text-align: center;
+}
+
+    .glass p {
+      font-size: 18px;
+      line-height: 2;
+      margin-bottom: 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+.config-wrapper {
+  display: block;
+}
+
+.config-visual {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  overflow: visible;
+  /* визуальное смещение вправо */
+  transform: translateX(3%);
+}
+
+.config-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+/* ===== HOTSPOTS ===== */
+.config-visual {
+  position: relative; /* важно: точки позиционируются относительно блока */
+}
+
+.hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.hotspot:focus {
+  outline: none;
+}
+
+.hotspot .dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: block;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ffffff,
+    #8B5CF6 45%,
+    #6D28D9 75%
+  );
+
+  box-shadow:
+    0 0 0 4px rgba(139,92,246,0.35),
+    0 0 18px rgba(139,92,246,0.65);
+
+  animation: pulse 2.6s ease-in-out infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hotspot:hover .dot,
+.hotspot:focus .dot {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 6px rgba(139,92,246,0.55),
+    0 0 34px rgba(139,92,246,1);
+}
+.tooltip {
+  position: absolute;
+  min-width: 220px;
+  max-width: 320px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(139,92,246,0.35);
+  background: rgba(5,5,8,0.88);
+  backdrop-filter: blur(10px);
+  z-index: 4;
+  display: none;
+}
+
+.tooltip-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--main);
+  font-size: 14px;
+}
+
+.tooltip-text {
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .hotspot .dot {
+    width: 12px;
+    height: 12px;
+  }
+  .tooltip {
+    max-width: 260px;
+  }
+}
+
+.config-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.config-list li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.config-list strong {
+  color: var(--text);
+}
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      width: 100%;
+      max-width: var(--content-max-width);
+    }
+
+    .card {
+      padding: 34px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(139,92,246,0.28);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(139,92,246,0.3);
+    }
+
+    .card h3, .card p {
+      text-align: center;
+    }
+
+    .card h3 {
+      color: var(--main);
+      margin-bottom: 14px;
+      font-size: 22px;
+    }
+    /* ===== PRODUCT CARDS ALIGN FIX ===== */
+#product .card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* центрируем содержимое */
+  text-align: center;    /* центрируем текст */
+}
+
+#product .card h3{
+  /* одинаковая высота заголовков */
+  min-height: 56px;      /* можно 52–64px, подстрой по вкусу */
+  display: flex;
+  align-items: center;   /* вертикально по центру внутри этой высоты */
+  justify-content: center;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+#product .card p{
+  /* гарантированное центрирование текста */
+  text-align: center;
+  margin: 0;             /* чтобы не плясали отступы */
+}
+
+.nav {
+  grid-column: 1 / -1;   /* занять всю ширину грида */
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  padding-top: 6px;
+}
+
+.nav-link {
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+    /* ===== СМЕЩЕНИЕ ПОСЛЕДНИХ ДВУХ КАРТОЧЕК В ТРЕТЬЕЙ СТРОКЕ ===== */
+    @media (min-width: 1200px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .grid > .card:nth-child(7),
+      .grid > .card:nth-child(8) {
+        transform: translateX(55%);
+      }
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      text-align: center;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+    .cta h2 {
+  margin-top: 120px;
+}
+
+    .btn {
+      margin-top: 70px;
+      padding: 18px 44px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(139,92,246,0.6);
+    }
+/* ===== FOOTER ===== */
+.footer {
+  padding: 48px 6vw 36px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.footer-partners {
+  margin-bottom: 28px;
+}
+
+.footer-partners-text {
+  font-size: 14px;
+  margin-bottom: 18px;
+  color: var(--muted);
+}
+
+.footer-partners-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+}
+
+.footer-partners-logos img {
+  height: 64px;
+  max-width: 200px;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.footer-copy {
+  font-size: 14px;
+}
+
+    /* ===== MEDIA QUERIES ===== */
+    @media (max-width: 1024px) {
+      .glass { padding: 48px; }
+      section { padding: 100px 8vw; }
+    }
+
+    @media (max-width: 768px) {
+      .glass { padding: 40px; }
+      section { padding: 100px 6vw; }
+      .title { font-size: clamp(48px, 12vw, 100px); }
+      .subtitle { font-size: 18px; line-height: 1.8; }
+      .kart { width: 140px; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 80px 5vw; }
+      .title { font-size: clamp(36px, 14vw, 70px); }
+      .subtitle { font-size: 16px; line-height: 1.7; }
+      .kart { width: 120px; }
+      .card { padding: 24px; }
+      .btn { padding: 14px 36px; font-size: 16px; }
+    }
+
+    @media (max-width: 360px) {
+      .kart { width: 100px; }
+      .card { padding: 20px; }
+    }
+  
+@media (max-width: 768px) {
+  .partner-logo {
+    height: 48px;
+  }
+
+  .partner-text {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}
+/* Убираем принудительные переносы строк в тексте партнёров на широких экранах */
+@media (min-width: 769px) {
+  .partner-text br {
+    display: none;
+  }
+  @media (max-width: 768px) {
+  .footer-partners-logos {
+    gap: 28px;
+  }
+
+  .footer-partners-logos img {
+    height: 48px;
+  }
+}
+}
+.config-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.config-list li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.config-list strong {
+  color: var(--text);
+}
+/* ===== GALLERY ===== */
+#gallery {
+  text-align: center;
+}
+
+#gallery h2 {
+  font-size: 36px;
+  color: var(--main);
+}
+
+.gallery-wrapper {
+  position: relative;   /* ⬅️ ВАЖНО */
+  border: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+
+.gallery-viewport {
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  transform: scale(1); /* 🔥 УВЕЛИЧЕНИЕ НА 300% */
+  transform-origin: center center;
+
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  pointer-events: none; /* 👈 важно */
+}
+
+.modal.is-open {
+  display: block;
+  pointer-events: auto; /* 👈 важно */
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+}
+
+.modal-dialog {
+  position: relative;
+  width: min(560px, calc(100% - 24px));
+  margin: 10vh auto 0;
+  padding: 28px 22px;
+  border-radius: 22px;
+
+  background: rgba(5,5,8,0.9);
+  border: 1px solid rgba(139,92,246,0.35);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+}
+
+.modal-title {
+  margin: 6px 0 8px;
+  font-size: 26px;
+  color: var(--text);
+  text-align: center;
+}
+
+.modal-subtitle {
+  margin-bottom: 18px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(139,92,246,0.35);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  cursor: pointer;
+
+  font-size: 22px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+.modal-close:hover {
+  background: rgba(139,92,246,0.25);
+}
+
+.modal-form {
+  display: grid;
+  gap: 12px;
+}
+
+.field span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 2px 0 6px;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(139,92,246,0.25);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  outline: none;
+}
+.field textarea {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(139,92,246,0.25);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+}
+
+.field textarea:focus {
+  border-color: rgba(139,92,246,0.55);
+  box-shadow: 0 0 0 4px rgba(139,92,246,0.18);
+}
+.field input:focus {
+  border-color: rgba(139,92,246,0.55);
+  box-shadow: 0 0 0 4px rgba(139,92,246,0.18);
+}
+
+.modal-submit {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.modal-note {
+  min-height: 18px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+/* ===== ARROWS ===== */
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(5,5,8,0.75);
+  border: 1px solid rgba(139,92,246,0.45);
+  color: #fff;
+  z-index: 10;
+  font-size: 34px;      /* ⬅️ больше и читабельнее */
+  width: 72px;          /* ⬅️ крупнее кнопка */
+  height: 72px;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 28px rgba(139,92,246,0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gallery-arrow:hover {
+  background: rgba(139,92,246,0.45);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-arrow.left { left: -40px; }
+.gallery-arrow.right { right: -40px; }
+  </style>
+</head>
+<script>
+(function () {
+  const images = ['Cart1.png', 'Cart2.png', 'Cart3.png'];
+  let currentIndex = 0;
+
+
+  function updateImage(direction) {
+    img.style.opacity = 0;
+    img.style.transform = `translateX(${direction * 20}px)`;
+
+    setTimeout(() => {
+      img.src = images[currentIndex];
+      img.style.transform = `translateX(${-direction * 20}px)`;
+
+      requestAnimationFrame(() => {
+        img.style.opacity = 1;
+        img.style.transform = 'translateX(0)';
+      });
+    }, 180);
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateImage(-1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateImage(1);
+  });
+})();
+</script>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+
+    <div class="header-top">
+      <div class="header-logo">СИБКАРТ</div>
+      <button class="btn header-cta" id="openLeadModalHeader">
+        Получить презентацию
+      </button>
+    </div>
+
+   <div class="header-nav">
+  <a href="#about">О компании</a>
+  <a href="#configuration">Конфигурация</a>
+  <a href="#gallery">Галерея</a>
+  <a href="#product">Философия</a>
+  <a href="#cta">Контакты</a>
+</div>
+
+  </div>
+</header>
+
+  <!-- CART -->
+  <img src="images.png" alt="Карт СИБКАРТ" class="kart" id="kart">
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="title">СИБКАРТ</div>
+      <div class="subtitle">
+        <span>Новая система картинга</span>
+        <span>Бизнес-подход к скорости</span>
+      </div>
+    </section>
+
+    <!-- О КОМПАНИИ -->
+<section id="about">
+  <div class="glass">
+    <h2>О компании</h2>
+    <p>
+      ООО «СИБКАРТ» — молодой российский стартап, создающий передовые карта для кольцевого картинга. Мы разрабатываем полностью отечественные продукты, используя лучшие материалы и инновационные технологии, включая модули ИИ-телеметрии для анализа заездов в реальном времени.
+    </p>
+    <p>
+      Наша цель — поднять уровень картинга в России, объединяя инженерный подход, качество и скорость в каждом элементе. Мы стремимся создавать карта, которые могут конкурировать с зарубежными аналогами, устанавливая новый стандарт отечественного картинга и открывая новые возможности для спортсменов и любителей скорости.
+    </p>
+    <p>
+      Каждый наш продукт — результат тщательной проработки и тестирования, отражающий страсть команды к технологиям и совершенству в деталях.
+    </p>
+    <p>
+      <strong>СИБКАРТ — это будущее российской гоночной индустрии, доступное уже сегодня.</strong>
+    </p>
+  </div>
+</section>
+<!-- КОНФИГУРАЦИЯ -->
+<section id="configuration">
+  <h2 class="section-title">Конфигурация</h2>
+
+    <div class="config-wrapper">
+      <div class="config-visual">
+    
+  <img
+    src="kart-cad.png"
+    alt="Конфигурация карта СИБКАРТ"
+    class="config-image"
+  >
+
+  <!-- HOTSPOTS (пока примерные позиции — потом подвинем) -->
+  <button class="hotspot" style="left: 67%; top: 55%;"
+    data-title="Модульная рама"
+    data-text="Пространственная модульная рама из лёгких и прочных материалов. Обеспечивает высокую жёсткость, точную геометрию и защиту пилота. Модульная конструкция позволяет быстро заменять элементы и адаптировать карт под разные трассы.">
+    <span class="dot" aria-hidden="true"></span>
+  </button>
+
+  <button class="hotspot" style="left: 80%; top: 25%;"
+    data-title="Двигатель"
+    data-text="2-тактный бензиновый двигатель 125 см³ мощностью до 28 л.с. Мгновенный отклик на газ и разгон до 100 км/ч менее чем за 5 секунд. Оптимизирован для стабильной работы в гоночных режимах.">
+    <span class="dot" aria-hidden="true"></span>
+  </button>
+
+  <button class="hotspot" style="left: 50%; top: 22%;"
+    data-title="Рулевое управление"
+    data-text="Точное рулевое управление обеспечивает прямую передачу усилия и полный контроль над траекторией в поворотах и на высоких скоростях.">
+    <span class="dot" aria-hidden="true"></span>
+  </button>
+
+  <button class="hotspot" style="left: 19%; top: 48%;"
+    data-title="Тормозная система"
+    data-text="Гидравлическая тормозная система с высокой эффективностью замедления. Стабильная работа при экстремальных нагрузках и уверенный контроль скорости перед поворотами.">
+    <span class="dot" aria-hidden="true"></span>
+  </button>
+
+  <button class="hotspot" style="left: 42%; top: 26%;"
+  data-title="ИИ-телеметрия"
+  data-text="Интеллектуальная система телеметрии собирает данные в реальном времени и анализирует стиль вождения, траектории и динамику карта. ИИ выявляет ошибки и формирует рекомендации для повышения эффективности пилота.">
+  <span class="dot" aria-hidden="true"></span>
+</button>
+
+  <button class="hotspot" style="left: 62%; top: 40%;"
+    data-title="Сиденье пилота"
+    data-text="Гоночное эргономичное сиденье с оптимальной посадкой. Улучшает развесовку, контроль и снижает утомляемость пилота во время заезда.">
+    <span class="dot" aria-hidden="true"></span>
+  </button>
+
+  <!-- TOOLTIP -->
+  <div class="tooltip" id="cfgTooltip" aria-hidden="true">
+    <div class="tooltip-title" id="cfgTooltipTitle"></div>
+    <div class="tooltip-text" id="cfgTooltipText"></div>
+  </div>
+</div>
+    </div>
+</section>
+<section id="gallery">
+  <h2>Рождённый для скорости</h2>
+
+  <div class="gallery-wrapper glass">
+    <button class="gallery-arrow left" aria-label="Предыдущее фото">‹</button>
+
+    <div class="gallery-viewport">
+      <img
+        src="Cart1.png"
+        alt="СИБКАРТ — визуал"
+        class="gallery-image"
+        id="galleryImage"
+      >
+    </div>
+
+    <button class="gallery-arrow right" aria-label="Следующее фото">›</button>
+  </div>
+  </section>
+
+    <!-- ПРОДУКТОВАЯ ФИЛОСОФИЯ -->
+    <section id="product">
+  <h2 class="section-title">Продуктовая философия</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>ИИ-телеметрия</h3>
+          <p>Модули ИИ анализируют заезды в реальном времени, собирая данные и помогая совершенствовать стиль вождения, а также оптимизировать настройку картов для максимальной производительности.</p>
+        </div>
+        <div class="card">
+          <h3>Модульная рама</h3>
+          <p>Конструкция карта легко адаптируется под апгрейды и модернизации, что позволяет изменять характеристики под разные трассы и требования гонщиков.</p>
+        </div>
+        <div class="card">
+          <h3>Российская разработка</h3>
+          <p>Полный инженерный цикл выполняется в России: от проектирования до сборки и тестирования, что обеспечивает контроль качества и развитие отечественных технологий.</p>
+        </div>
+        <div class="card">
+          <h3>Лучшие материалы</h3>
+          <p>Используем высокотехнологичные и сертифицированные материалы, которые обеспечивают долговечность, безопасность и стабильную работу на протяжении всего срока службы.</p>
+        </div>
+        <div class="card">
+          <h3>Безопасность и надежность</h3>
+          <p>Каждый элемент карта проходит строгие испытания, чтобы обеспечить защиту гонщика и долговечность конструкции даже в экстремальных условиях.</p>
+        </div>
+        <div class="card">
+          <h3>Инновационный дизайн и эргономика</h3>
+          <p>Карта разрабатываются с учетом аэродинамики и удобства водителя, что повышает комфорт, контроль и скорость на трассе.</p>
+        </div>
+        <div class="card">
+          <h3>Адаптация под разные трассы</h3>
+          <p>Карта легко настраиваются под различные типы треков и условий, обеспечивая стабильное поведение и максимальную эффективность на любом покрытии.</p>
+        </div>
+        <div class="card">
+          <h3>Поддержка и развитие</h3>
+          <p>Мы сопровождаем каждый продукт технической поддержкой и рекомендациями, а также непрерывно развиваем технологии для будущих обновлений и новых моделей.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+   <section class="cta" id="cta">
+      <h2>Новая эра картинга начинается здесь</h2>
+      <button class="btn" id="openLeadModal">Получить презентацию СИБКАРТ</button>
+    </section>
+
+  </main>
+<footer class="footer">
+  <div class="footer-partners">
+    <p class="footer-partners-text">
+      Проект реализован при поддержке Фонда содействия инновациям
+      в рамках программы «Студенческий стартап»
+      мероприятия «Платформа университетского технологического
+      предпринимательства» федерального проекта «Технологии».
+    </p>
+
+    <div class="footer-partners-logos">
+      <img src="fond.png" alt="Фонд содействия инновациям">
+      <img src="platform.png" alt="Платформа университетского технологического предпринимательства">
+    </div>
+  </div>
+
+  <div class="footer-copy">
+    © ООО «СИБКАРТ»
+  </div>
+</footer>
+<!-- ===== MODAL: GET PRESENTATION ===== -->
+<div class="modal" id="leadModal" aria-hidden="true">
+  <div class="modal-backdrop" data-close="true"></div>
+
+  <div class="modal-dialog" role="dialog" aria-modal="true">
+    <button class="modal-close" type="button" data-close="true">×</button>
+
+    <h3 class="modal-title">Получить презентацию</h3>
+    <p class="modal-subtitle">
+      Оставьте контакты — отправим материалы и ответим на вопросы
+    </p>
+
+    <form class="modal-form" id="leadForm">
+    <label class="field">
+  <span>Имя</span>
+  <input type="text" name="name" placeholder="Например: Максим" required>
+</label>
+<label class="field">
+  <span>Номер телефона</span>
+  <input
+    type="tel"
+    name="phone"
+    id="phoneInput"
+    placeholder="+7 ___ ___ __-__"
+    required
+  />
+</label>
+
+<label class="field">
+  <span>ID Telegram</span>
+  <input type="text" name="telegram" placeholder="@username" />
+</label>
+
+
+<button class="btn modal-submit" type="submit">Отправить</button>
+
+<div class="modal-note" id="leadFormNote" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+  <script>
+    const kart = document.getElementById('kart');
+    let lastX = 0;
+
+    function spawnParticle(type, x, y, idle=false) {
+      const p = document.createElement('div');
+      p.className = `particle ${type}`;
+      const size = idle
+        ? (type === 'smoke' ? 10 + Math.random() * 8 : 3 + Math.random() * 3)
+        : (type === 'smoke' ? 18 + Math.random() * 14 : 6 + Math.random() * 6);
+      p.style.width = p.style.height = size + 'px';
+      p.style.left = x + 'px';
+      p.style.top = y + 'px';
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 1200);
+    }
+
+    function idleSmoke() {
+      const rect = kart.getBoundingClientRect();
+      if (Math.random() < 0.2) {
+        spawnParticle('smoke', rect.left - 10, rect.top + 30, true);
+        spawnParticle('dust', rect.left - 6, rect.top + 48, true);
+      }
+      requestAnimationFrame(idleSmoke);
+    }
+
+    function updateKartPosition() {
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const scrollProgress = Math.min(window.scrollY / maxScroll, 1);
+
+      const kartWidth = kart.offsetWidth;
+      const visiblePart = kartWidth * 0.33; 
+      const startOffset = -kartWidth + visiblePart;
+      const pathWidth = window.innerWidth - visiblePart;
+
+      const x = startOffset + scrollProgress * (pathWidth - startOffset);
+      kart.style.transform = `translateX(${x}px)`;
+      kart.style.opacity = 1;
+
+      if (Math.abs(x - lastX) > 5) {
+        const rect = kart.getBoundingClientRect();
+        spawnParticle('smoke', rect.left - 10, rect.top + 30);
+        spawnParticle('dust', rect.left - 6, rect.top + 48);
+        lastX = x;
+      }
+    }
+
+    window.addEventListener('load', () => {
+      const kartWidth = kart.offsetWidth;
+      const visiblePart = kartWidth * 0.33;
+      kart.style.transform = `translateX(${-kartWidth + visiblePart}px)`;
+    });
+
+    window.addEventListener('scroll', updateKartPosition);
+    window.addEventListener('resize', updateKartPosition);
+    idleSmoke();
+    // ===== CONFIG HOTSPOTS TOOLTIP =====
+(function () {
+  const tooltip = document.getElementById('cfgTooltip');
+  const ttTitle = document.getElementById('cfgTooltipTitle');
+  const ttText = document.getElementById('cfgTooltipText');
+  const visual = document.querySelector('.config-visual');
+
+  if (!tooltip || !ttTitle || !ttText || !visual) return;
+
+  function showTooltip(hs) {
+    ttTitle.textContent = hs.dataset.title || '';
+    ttText.textContent = hs.dataset.text || '';
+
+    const visualRect = visual.getBoundingClientRect();
+    const hsRect = hs.getBoundingClientRect();
+
+    // координаты внутри .config-visual
+    const x = (hsRect.left - visualRect.left) + 18;
+    const y = (hsRect.top - visualRect.top) - 10;
+
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${y}px`;
+    tooltip.style.display = 'block';
+    tooltip.setAttribute('aria-hidden', 'false');
+  }
+
+  function hideTooltip() {
+    tooltip.style.display = 'none';
+    tooltip.setAttribute('aria-hidden', 'true');
+  }
+
+  // Hover
+  visual.addEventListener('mouseover', (e) => {
+    const hs = e.target.closest('.hotspot');
+    if (hs) showTooltip(hs);
+  });
+
+  visual.addEventListener('mouseout', (e) => {
+    const hs = e.target.closest('.hotspot');
+    if (hs) hideTooltip();
+  });
+
+  // Keyboard accessibility
+  visual.addEventListener('focusin', (e) => {
+    const hs = e.target.closest('.hotspot');
+    if (hs) showTooltip(hs);
+  });
+
+  visual.addEventListener('focusout', (e) => {
+    const hs = e.target.closest('.hotspot');
+    if (hs) hideTooltip();
+  });
+
+  // Hide on scroll (чтобы не "зависало")
+  window.addEventListener('scroll', hideTooltip, { passive: true });
+})();
+  </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const images = ['Cart1.png', 'Cart2.png', 'Cart3.png'];
+  let currentIndex = 0;
+
+  const img = document.getElementById('galleryImage');
+  const prevBtn = document.querySelector('.gallery-arrow.left');
+  const nextBtn = document.querySelector('.gallery-arrow.right');
+
+  if (!img || !prevBtn || !nextBtn) {
+    console.warn('Gallery: элементы не найдены');
+    return;
+  }
+
+  function updateImage(direction) {
+    img.style.opacity = '0';
+
+    setTimeout(() => {
+      img.src = images[currentIndex];
+      img.alt = `СИБКАРТ — фото ${currentIndex + 1}`;
+      img.style.opacity = '1';
+    }, 180);
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateImage(-1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateImage(1);
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const openBtn = document.getElementById('openLeadModal');
+  const modal = document.getElementById('leadModal');
+  const form = document.getElementById('leadForm');
+  const note = document.getElementById('leadFormNote');
+const phoneInput = form.querySelector('input[name="phone"]');
+const headerBtn = document.getElementById('openLeadModalHeader');
+if (headerBtn) headerBtn.addEventListener('click', openModal);
+if (phoneInput) {
+  phoneInput.addEventListener('input', () => {
+    let value = phoneInput.value.replace(/\D/g, '');
+
+    // Если ввод начался с 8
+    if (value.startsWith('8')) {
+      value = '7' + value.slice(1);
+    }
+
+    // Если ввод начался с 9
+    if (value.startsWith('9')) {
+      value = '7' + value;
+    }
+
+    // Формируем отображение
+    if (value.startsWith('7')) {
+      phoneInput.value = '+7 ' + value.slice(1);
+    } else {
+      phoneInput.value = value;
+    }
+  });
+
+  // При фокусе сразу подставляем +7
+  phoneInput.addEventListener('focus', () => {
+    if (!phoneInput.value) {
+      phoneInput.value = '+7 ';
+    }
+  });
+}
+  if (!openBtn || !modal || !form) return;
+
+  function openModal() {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    // Фокус на первое поле
+    const firstInput = form.querySelector('input');
+    if (firstInput) firstInput.focus();
+  
+  }
+  const tgInput = form.querySelector('input[name="telegram"]');
+
+if (tgInput) {
+  function normalizeTelegram() {
+    let v = tgInput.value.trim();
+
+    // убираем пробелы внутри
+    v = v.replace(/\s+/g, '');
+
+    // если пусто — ничего не делаем (чтобы не раздражать)
+    if (!v) return;
+
+    // убираем все ведущие @@@@@
+    v = v.replace(/^@+/, '');
+
+    // ставим один @
+    tgInput.value = '@' + v;
+  }
+
+  // Если фокус — сразу подставим @
+  tgInput.addEventListener('focus', () => {
+    if (!tgInput.value.trim()) tgInput.value = '@';
+  });
+
+  // На ввод нормализуем
+  tgInput.addEventListener('input', () => {
+    normalizeTelegram();
+  });
+
+  // Если ушёл с поля и остался только @ — очистим
+  tgInput.addEventListener('blur', () => {
+    if (tgInput.value.trim() === '@') tgInput.value = '';
+  });
+}
+
+  function closeModal() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    note.textContent = '';
+    form.reset();
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+
+  // Закрытие по клику на фон / крестик
+  modal.addEventListener('click', (e) => {
+    const target = e.target;
+    if (target && target.dataset && target.dataset.close === 'true') {
+      closeModal();
+    }
+  });
+
+  // Закрытие по ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeModal();
+    }
+  });
+
+  // Отправка (пока заглушка)
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const payload = {
+      name: (data.get('name') || '').toString().trim(),
+      phone: (data.get('phone') || '').toString().trim(),
+      telegram: (data.get('telegram') || '').toString().trim(),
+    };
+
+    // Простая проверка
+  if (!payload.name || !payload.phone) {
+  note.textContent = 'Пожалуйста, заполните имя и номер телефона.';
+  return;
+}
+    // Тут позже подключим реальную отправку (Telegram bot / email / Google Forms)
+    note.textContent = '✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.';
+
+  });
+  
+});
+
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const phoneInput = document.getElementById('phoneInput');
+  if (!phoneInput) return;
+
+  function formatPhone(value) {
+    let digits = value.replace(/\D/g, '');
+
+    if (digits.startsWith('8')) {
+      digits = '7' + digits.slice(1);
+    }
+
+    if (digits.startsWith('9')) {
+      digits = '7' + digits;
+    }
+
+    digits = digits.slice(0, 11);
+
+    let result = '+7';
+
+    if (digits.length > 1) result += ' ' + digits.slice(1, 4);
+    if (digits.length >= 5) result += ' ' + digits.slice(4, 7);
+    if (digits.length >= 8) result += ' ' + digits.slice(7, 9);
+    if (digits.length >= 10) result += '-' + digits.slice(9, 11);
+
+    return result;
+  }
+
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = formatPhone(phoneInput.value);
+  });
+
+  phoneInput.addEventListener('focus', () => {
+    if (!phoneInput.value) phoneInput.value = '+7 ';
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const phoneInput = document.getElementById('phoneInput');
+  const form = document.getElementById('leadForm');
+  const note = document.getElementById('leadFormNote');
+
+  if (!phoneInput || !form) return;
+
+  function formatPhone(value) {
+    let digits = value.replace(/\D/g, '');
+
+    // 8 → +7
+    if (digits.startsWith('8')) {
+      digits = '7' + digits.slice(1);
+    }
+
+    // 9 → +7 9
+    if (digits.startsWith('9')) {
+      digits = '7' + digits;
+    }
+
+    digits = digits.slice(0, 11);
+
+    let result = '+7';
+
+    if (digits.length > 1) result += ' ' + digits.slice(1, 4);
+    if (digits.length >= 5) result += ' ' + digits.slice(4, 7);
+    if (digits.length >= 8) result += ' ' + digits.slice(7, 9);
+    if (digits.length >= 10) result += '-' + digits.slice(9, 11);
+
+    return result;
+  }
+  
+
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = formatPhone(phoneInput.value);
+  });
+
+  phoneInput.addEventListener('focus', () => {
+    if (!phoneInput.value) phoneInput.value = '+7 ';
+  });
+
+  // ✅ ВАЛИДАЦИЯ ПРИ ОТПРАВКЕ
+ form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const digits = phoneInput.value.replace(/\D/g, '');
+
+  // ❌ ОШИБКА — НЕ ЗАКРЫВАЕМ МОДАЛКУ
+  if (digits.length < 11) {
+    note.textContent = 'Введите корректный номер телефона (10 цифр).';
+    note.style.color = '#ff6b6b';
+    phoneInput.focus();
+    return; // ⬅️ КЛЮЧЕВО
+  }
+
+  // ✅ УСПЕХ
+  note.textContent = '✅ Заявка отправлена! Мы свяжемся с вами.';
+  note.style.color = '#8B5CF6';
+
+  // ⏳ закрываем ТОЛЬКО ПОСЛЕ УСПЕХА
+  setTimeout(() => {
+    closeModal();
+  }, 1200);
+});
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.header-nav a');
+  const sections = Array.from(navLinks)
+    .map(link => {
+      const id = link.getAttribute('href');
+      return id && id.startsWith('#') ? document.querySelector(id) : null;
+    })
+    .filter(Boolean);
+
+  function onScroll() {
+    const scrollPos = window.scrollY + window.innerHeight * 0.35;
+
+    let currentSection = null;
+
+    for (const section of sections) {
+      if (scrollPos >= section.offsetTop) {
+        currentSection = section;
+      }
+    }
+
+    navLinks.forEach(link => link.classList.remove('active'));
+
+    if (currentSection) {
+      const activeLink = document.querySelector(
+        `.header-nav a[href="#${currentSection.id}"]`
+      );
+      if (activeLink) activeLink.classList.add('active');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // сразу подсветить при загрузке
+});
+</script>
+</body>
+</html>
